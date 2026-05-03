@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barja's menu</title>
+    <link rel="stylesheet" href="./Css/styles.css">
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Barja's menu <br>Snacks & BEBIDAS</h1>
+        <h3>FRAPPES, BEBIDAS Y MAS</h3>
+    </header>
+
+    <section id="Principal">
+
+        <div id="leche">Frappes de leche</div>
+        <div class="cardsL" id="gridL"></div>
+
+        <div id="agua">Frappes de agua</div>
+        <div class="cardsA" id="gridA"></div>
+
+        <div id="Bebidas">Bebidas</div>
+        <div class="cardsB" id="gridB"></div>
+
+        <div id="Snacks">Snacks</div>
+        <div class="cardsS" id="gridS"></div>
+
+    </section>
+
+    <section id="DetalleP">
+
+        <div class="Detalle">
+        <button class="detalle-back" onclick="goBack()">← Regresar</button>
+        <div class="detalle-hero"></div>
+        <div class="detalleImg" id="Detalle-img"></div>
+        <div class="detalleName" id="Detalle-name"></div>
+        <div class="detallePrice" id="Detalle-price"></div>
+        </div>
+
+        <div class="detalle-body">
+        <p class="detalle-info" id="d-desc"></p>
+        <p class="detalle-subtext"></p>
+        <p class="detalle-subtext"></p>
+        <label class="detalle-textarea-label">Instrucciones Especiales:</label>
+        <div class="detalle-hint">Ejemplo: Sin Miguelito</div>
+        <textarea class="detalle-textarea" id="d-notes" placeholder="Escribe aquí tus instrucciones..."></textarea>
+        <button class="add-btn">Agregar al pedido</button>
+        </div>
+
+    </section>
+
+    <section id="Carrito">
+
+    </section>
+
+    <section id="Compra">
+
+    </section>
+
+    <script src="./Js/main.js"></script>
+</body>
+</html>
