@@ -1,3 +1,4 @@
+const carrito = [];
 
 const leche = [
   { name: "Frappé de Galleta", price: "$65", desc: "Lleva crema batida, chocolate y/o lechera depende el sabor de su elección y un palito de chocolate." },
@@ -29,6 +30,8 @@ const snacks = [
     {name: "Alitas", price: "$70", desc: "Son 6 alitas adobadas preparadas con la salsa de su preferencia (BBQ o naturales) con verdura y por $10 más le pude agregar papas a la francesa"},
 ];
 
+let itemSeleccionado = null;
+
 function crearCartas(items, gridId) {
     const grid = document.getElementById(gridId);
 
@@ -54,9 +57,11 @@ function abrirDetalle(item) {
     document.getElementById("d-notes").value = "";
     document.getElementById("Principal").classList.remove("active");
     document.getElementById("DetalleP").classList.add("active");
+
+    itemSeleccionado = item;
 }
 
 function goBack() {
-  document.getElementById("detail-page").classList.remove("active");
-  document.getElementById("menu-page").classList.add("active");
+  document.getElementById("DetalleP").classList.remove("active");
+  document.getElementById("Principal").classList.add("active");
 }
