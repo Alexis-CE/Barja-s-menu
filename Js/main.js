@@ -263,6 +263,10 @@ function actualizarContador() {
 
     const url = `https://wa.me/525549641567?text=${encodeURIComponent(mensaje)}`;
     window.open(url);
+
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
   }
 
   let productoActual = null;
