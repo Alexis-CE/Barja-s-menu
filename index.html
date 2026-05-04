@@ -31,7 +31,7 @@
         <div class="cardsS" id="gridS"></div>
 
         <div class="flotante" onclick="abrirCarrito()"> 
-        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="white" stroke-width="3">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="white" stroke-width="">
             <circle cx="9" cy="21" r="1"></circle>
             <circle cx="20" cy="21" r="1"></circle>
             <path d="M1 1h4l2.6 13.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6L23 6H6"></path>
@@ -79,17 +79,31 @@
     </section>
 
     <section id="Compra">
-        <div id="datosP"><input type="text" id="nombre" placeholder="Ingrese su nombre"></div>
-        <input type="radio" name="pago" id="efectivo" value="Efectivo" > <label for="efectivo">Efectivo</label>
-        <input type="radio" name="pago" id="transferenciaInput" value="transferencia"> <label for="transferenciaInput">Transferencia</label>
-        <div id="cambioBox" style="display: none;">
-        <input type="number" id="pagaCon" placeholder="¿Con cuánto pagas? (ej: 200)">
+    <div class="pago-container">
+        <div id="datosP">
+            <input type="text" id="nombre" class="pago-input" placeholder="Ingrese su nombre">
         </div>
-        <div id="transferencia"></div>
-        <div id="confirmacion"></div>
+
+        <div class="metodo-pago">
+            <label>
+                <input type="radio" name="pago" id="efectivo" value="Efectivo" checked> Efectivo
+            </label>
+            <label>
+                <input type="radio" name="pago" id="transferenciaInput" value="transferencia"> Transferencia
+            </label>
+        </div>
+
+        <div id="cambioBox">
+            <input type="number" id="pagaCon" class="pago-input" placeholder="¿Con cuánto pagas? (ej: 200)">
+        </div>
+
         <button id="confirmarP" onclick="enviarW()">Confirmar Pedido</button>
-        <button class="detalle-back" onclick="goBack()">← Regresar</button>
-    </section>
+
+        <button class="btn-regresar-pago" onclick="goBack()">
+            ← Regresar
+        </button>
+    </div>
+</section>
 
     <script src="./Js/main.js"></script>
 </body>

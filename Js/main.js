@@ -108,7 +108,7 @@
     } else {
       carrito.push({
         name: itemSeleccionado.name,
-        price: `$${precioNum}`,
+        priceUnit: precioNum,
         priceNum: precioNum * cantidadSeleccionada,
         notas: notas,
         extras: extras,
@@ -129,30 +129,73 @@
     pantallaActual = "Principal";
   }
 
-  function contenidoCarrito() {
-    const contenedor = document.getElementById("contenidoC");
-    contenedor.innerHTML = "";
+function contenidoCarrito() {
+  const contenedor = document.getElementById("contenidoC");
+  contenedor.innerHTML = "";
 
-    let total = 0;
+  let total = 0;
 
-    carrito.forEach(item => {
-      total += item.priceNum || parseInt(item.price.replace("$", ""));
-
-      const div = document.createElement("button");
-      div.innerHTML = `
-        <p><b>x${item.cantidad} ${item.name}</b></p> 
-        <p>$${item.priceNum}</p>
-        <p>${item.notas || ""}</p>
-        ${item.extras.length ? `<p>Extras: ${item.extras.join(", ")}</p>` : ""}
-        <hr>
-      `;
-      contenedor.appendChild(div);
-    });
-
-    const totalDiv = document.createElement("div");
-    totalDiv.innerHTML = `<h3>Total: $${total}</h3>`;
-    contenedor.appendChild(totalDiv);
+  if (carrito.length === 0) {
+    contenedor.innerHTML = "<p style='text-align:center; padding:20px;'>Tu carrito está vacío</p>";
+    document.getElementById("irCarrito").style.display = "none";
+    return;
+  } else {
+    document.getElementById("irCarrito").style.display = "block";
   }
+
+  carrito.forEach((item, index) => {
+    total += item.priceNum;
+
+    const div = document.createElement("div");
+    div.className = "carrito-item";
+
+    div.innerHTML = `
+      <!-- BOTÓN PARA ELIMINAR ITEM COMPLETO -->
+      <button class="btn-eliminar" onclick="eliminarItemTotal(${index})">×</button>
+      
+      <div class="carrito-header">
+          <div>
+            <h4>x${item.cantidad} ${item.name}</h4>
+            <div class="carrito-precio">$${item.priceNum}</div>
+          </div>
+      </div>
+
+      ${item.extras.length ? `<div class="carrito-info">Extras: ${item.extras.join(", ")}</div>` : ""}
+      ${item.notas ? `<div class="carrito-info">Nota: ${item.notas}</div>` : ""}
+
+      <div class="carrito-controles">
+          <div class="cantidad-box">
+              <button onclick="restarItem(${index})">−</button>
+              <span class="carrito-cantidad">${item.cantidad}</span>
+              <button onclick="sumarItem(${index})">+</button>
+          </div>
+      </div>
+    `;
+    contenedor.appendChild(div);
+  });
+
+  const totalDiv = document.createElement("div");
+  totalDiv.className = "total-box";
+  totalDiv.innerHTML = `<h3>Total: $${total}</h3>`;
+  contenedor.appendChild(totalDiv);
+}
+
+function eliminarItemTotal(index) {
+  if(confirm("¿Quieres eliminar este producto de tu pedido?")) {
+    carrito.splice(index, 1);
+    actualizarContador();
+    contenidoCarrito();
+  }
+}
+
+function actualizarContador() {
+  const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+  const contadorEl = document.getElementById("contador");
+  contadorEl.textContent = totalItems;
+  
+  // Ocultar contador si es 0 (opcional)
+  contadorEl.style.display = totalItems > 0 ? "block" : "none";
+}
 
   function abrirCompra() {
     document.getElementById("Carrito").classList.remove("active");
@@ -281,4 +324,27 @@ function cambiarCantidad(valor) {
   if (cantidadSeleccionada < 1) cantidadSeleccionada = 1;
 
   document.getElementById("cantidad").textContent = cantidadSeleccionada;
+  document.getElementById("contador").textContent =
+  carrito.reduce((acc, item) => acc + item.cantidad, 0);
+}
+
+function eliminarItem(index) {
+  carrito.splice(index, 1);
+  contenidoCarrito();
+}
+
+function restarItem(index) {
+  const item = carrito[index];
+
+  if (item.cantidad > 1) {
+    item.cantidad -= 1;
+    item.priceNum -= item.priceUnit;
+  } else {
+    carrito.splice(index, 1);
+  }
+
+  contenidoCarrito();
+
+  document.getElementById("contador").textContent =
+    carrito.reduce((acc, item) => acc + item.cantidad, 0);
 }
