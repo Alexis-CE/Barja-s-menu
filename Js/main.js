@@ -85,12 +85,16 @@ function guardarCarrito() {
     let extras = [];
     let precioExtra = 0;
 
-    document.querySelectorAll("#extras input:checked").forEach(el => {
+    // Capturar Checkboxes
+    document.querySelectorAll("#extras input[type='checkbox']:checked").forEach(el => {
         extras.push(el.value);
-        
-        if (el.dataset.precio) {
-            precioExtra += parseInt(el.dataset.precio);
-        }
+        if (el.dataset.precio) precioExtra += parseInt(el.dataset.precio);
+    });
+
+    // Capturar Radios (Sabor o Alcohol Base)
+    document.querySelectorAll("#extras input[type='radio']:checked").forEach(el => {
+        extras.push(el.value);
+        if (el.dataset.precio) precioExtra += parseInt(el.dataset.precio);
     });
 
     let precioBase = parseInt(itemSeleccionado.price.replace("$", ""));
@@ -205,19 +209,15 @@ function actualizarContador() {
 
   function enviarW() {
     const nombre = document.getElementById("nombre").value;
-    const pago = document.querySelector('input[name="pago"]:checked');
+    const pagoElement = document.querySelector('input[name="pago"]:checked');
     const pagaCon = document.getElementById("pagaCon").value;
 
-    if (pago.value === "Efectivo" && !pagaCon) {
-    alert("Indica con cuánto pagarás");
-    return;
-  }
-
-    if (!nombre || !pago) {
-      alert("Por favor completa tu nombre y método de pago");
-      return;
+    if (!nombre || !pagoElement) {
+        alert("Por favor completa tu nombre y método de pago");
+        return;
     }
 
+    const pagoValor = pagoElement.value;
     let total = 0;
 
     let mensaje = `Hola! Mi nombre es ${nombre}\n`;
@@ -226,36 +226,29 @@ function actualizarContador() {
     mensaje += `=========================\n\n`;
 
     carrito.forEach(item => {
-      total += item.priceNum || parseInt(item.price.replace("$", ""));
-
-      mensaje += `- x${item.cantidad} ${item.name} ($${item.priceNum})\n`;
-
-      if (item.extras && item.extras.length > 0) {
-        item.extras.forEach(extra => {
-          mensaje += `   • ${extra}\n`;
-        });
-      }
-
-      if (item.notas) {
-        mensaje += `   • Nota: ${item.notas}\n`;
-      }
-
-      mensaje += `\n`;
+        total += item.priceNum;
+        mensaje += `- x${item.cantidad} ${item.name} ($${item.priceNum})\n`;
+        if (item.extras.length > 0) mensaje += `   • Extras: ${item.extras.join(", ")}\n`;
+        if (item.notas) mensaje += `   • Nota: ${item.notas}\n`;
+        mensaje += `\n`;
     });
 
     mensaje += `=========================\n`;
-    mensaje += `TOTAL: $${total}\n`;
+    mensaje += `*TOTAL: $${total}*\n`;
     mensaje += `=========================\n`;
-    mensaje += `Pago: ${pago.value}\n`;
-    mensaje += `=========================\n`;
+    mensaje += `Pago: ${pagoValor}\n`;
 
-    if (pago.value === "Efectivo") {
-    mensaje += `Paga con: $${pagaCon}\n`;
+    if (pagoValor === "Efectivo") {
+        if (!pagaCon || parseInt(pagaCon) < total) {
+            alert("Monto de pago inválido");
+            return;
+        }
+        mensaje += `Paga con: $${pagaCon}\n`;
+        mensaje += `Cambio: $${pagaCon - total}\n`;
     }
 
-    if (pago.value === "Efectivo" && pagaCon < total) {
-    alert("El monto es menor al total");
-    return;
+    if (pagoValor === "transferencia") {
+        mensaje += `\n⚠️ *Recuerda mandar tu comprobante de pago.*\n`;
     }
 
     mensaje += `=========================\n`;
@@ -263,73 +256,63 @@ function actualizarContador() {
     const url = `https://wa.me/525549641567?text=${encodeURIComponent(mensaje)}`;
     window.open(url);
 
-    setTimeout(() => {
-      location.reload();
-    }, 1000);
-  }
+    setTimeout(() => { location.reload(); }, 1000);
+}
 
   let productoActual = null;
 
-  function renderExtras(producto) {
-      const extrasDiv = document.getElementById("extras");
-      extrasDiv.innerHTML = "";
-      if (!extrasDiv) return;
+ function renderExtras(producto) {
+    const extrasDiv = document.getElementById("extras");
+    if (!extrasDiv) return;
+    extrasDiv.innerHTML = "";
 
-      if (producto.name.includes("Piña colada")) {
-              extrasDiv.innerHTML += `
-                  <div class="extra-item">
-                      <label>
-                          <input type="checkbox" value="Con Alcohol (Base)"> 
-                          Con Alcohol 1 Shot (Gratis)
-                      </label>
-                  </div>
-                  <div class="extra-item">
-                      <label>
-                          <input type="checkbox" value="Shot Extra" data-precio="10"> 
-                          Segundo Shot Extra (+$10)
-                      </label>
-                  </div>
-              `;
-      }
+    const nombre = producto.name.toLowerCase();
 
-      if (producto.name.includes("Azulito")) {
-              extrasDiv.innerHTML += `
-                  <div class="extra-item">
-                      <label>
-                          <input type="checkbox" value="Con Alcohol" data-precio="10"> 
-                          Añadir Alcohol (+$10)
-                      </label>
-                  </div>
-              `;
-      }
+    // Lógica unificada para Piña Colada y Azulito
+    if (nombre.includes("piña colada") || nombre.includes("azulito")) {
+        extrasDiv.innerHTML += `
+            <div class="extra-group">
+                <label style="display:block; margin-bottom:5px; font-weight:bold;">Opciones de Alcohol:</label>
+                <div class="extra-item">
+                    <label><input type="radio" name="alcohol_base" value="Sin Alcohol" checked> Sin Alcohol</label>
+                </div>
+                <div class="extra-item">
+                    <label><input type="radio" name="alcohol_base" value="Con Alcohol (1er Shot Gratis)"> Con Alcohol (1er Shot Gratis)</label>
+                </div>
+                <div class="extra-item" style="margin-top:8px; border-top:1px solid #eee; padding-top:8px;">
+                    <label><input type="checkbox" value="2do Shot Extra" data-precio="10"> ¿Deseas un 2do Shot? (+$10)</label>
+                </div>
+            </div>
+        `;
+    }
 
-      if (producto.name.includes("Boneless")) {
-          extrasDiv.innerHTML += `
-              <label>Sabor:</label><br>
-              <input type="radio" name="sabor" value="BBQ"> BBQ
-              <input type="radio" name="sabor" value="Lemon Pepper"> Lemon Pepper
-              <input type="radio" name="sabor" value="Natural"> Natural
-              <br><br>
-              <input type="checkbox" value="Papas extra"> + Papas a la francesa (+$10)
-          `;
-      }
+    if (nombre.includes("boneless")) {
+        extrasDiv.innerHTML += `
+            <label>Sabor:</label><br>
+            <input type="radio" name="sabor" value="BBQ" checked> BBQ
+            <input type="radio" name="sabor" value="Lemon Pepper"> Lemon Pepper
+            <input type="radio" name="sabor" value="Natural"> Natural
+            <br><br>
+            <input type="checkbox" value="Papas extra" data-precio="10"> + Papas a la francesa (+$10)
+        `;
+    }
 
-      if (producto.name.includes("Papas")) {
-          extrasDiv.innerHTML += `
-              <label>Salsa:</label><br>
-              <input type="radio" name="salsa" value="Botanera"> Botanera
-              <input type="radio" name="salsa" value="Valentina"> Valentina
-          `;
-      }
+    if (nombre.includes("papas")) {
+        extrasDiv.innerHTML += `
+            <label>Salsa:</label><br>
+            <input type="radio" name="salsa" value="Botanera" checked> Botanera
+            <input type="radio" name="salsa" value="Valentina"> Valentina
+        `;
+    }
 
-      if (producto.name.includes("Alitas")) {
-          extrasDiv.innerHTML += `
-              <label>Sabor:</label><br>
-              <input type="radio" name="sabor" value="BBQ"> BBQ
-              <input type="radio" name="sabor" value="Natural"> Natural
-          `;
-      }
-  }
+    if (nombre.includes("alitas")) {
+        extrasDiv.innerHTML += `
+            <label>Sabor:</label><br>
+            <input type="radio" name="sabor" value="BBQ" checked> BBQ
+            <input type="radio" name="sabor" value="Natural"> Natural
+        `;
+    }
+}
 
   function regresarAlPrincipal() {
     document.querySelectorAll("section").forEach(s => s.classList.remove("active"));

@@ -379,6 +379,8 @@ section.active { display: block; }
     padding: 8px 0;
     display: flex;
     align-items: center;
+    margin: 5px 0;
+    font-size: 14px;
 }
 
 .extra-item input[type="checkbox"] {
@@ -386,6 +388,14 @@ section.active { display: block; }
     height: 18px;
     margin-right: 10px;
     cursor: pointer;
+}
+
+.extra-group {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: left;
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
