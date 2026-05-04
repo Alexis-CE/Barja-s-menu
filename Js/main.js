@@ -80,46 +80,45 @@
     document.getElementById(pantallaActual).classList.add("active");
   }
 
-  function guardarCarrito() {
+function guardarCarrito() {
     const notas = document.getElementById("d-notes").value;
-
     let extras = [];
+    let precioExtra = 0;
+
     document.querySelectorAll("#extras input:checked").forEach(el => {
-      extras.push(el.value);
+        extras.push(el.value);
+        
+        if (el.dataset.precio) {
+            precioExtra += parseInt(el.dataset.precio);
+        }
     });
 
-    let precioNum = parseInt(itemSeleccionado.price.replace("$", ""));
-
-    if (extras.includes("Papas extra")) {
-      precioNum += 10;
-    }
+    let precioBase = parseInt(itemSeleccionado.price.replace("$", ""));
+    let precioUnitarioFinal = precioBase + precioExtra;
 
     const existente = carrito.find(item => 
-    item.name === itemSeleccionado.name &&
-    item.notas === notas &&
-    item.extras.length === extras.length &&
-    item.extras.every(e => extras.includes(e))
-  );
+        item.name === itemSeleccionado.name &&
+        item.notas === notas &&
+        JSON.stringify(item.extras) === JSON.stringify(extras)
+    );
 
     if (existente) {
-      existente.cantidad += cantidadSeleccionada;
-      existente.priceNum += precioNum * cantidadSeleccionada;
-      existente.price = `$${existente.priceNum}`;
+        existente.cantidad += cantidadSeleccionada;
+        existente.priceNum = existente.priceUnit * existente.cantidad;
     } else {
-      carrito.push({
-        name: itemSeleccionado.name,
-        priceUnit: precioNum,
-        priceNum: precioNum * cantidadSeleccionada,
-        notas: notas,
-        extras: extras,
-        cantidad: cantidadSeleccionada
-      });
+        carrito.push({
+            name: itemSeleccionado.name,
+            priceUnit: precioUnitarioFinal, 
+            priceNum: precioUnitarioFinal * cantidadSeleccionada,
+            notas: notas,
+            extras: extras,
+            cantidad: cantidadSeleccionada
+        });
     }
 
-    document.getElementById("contador").textContent = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-
+    actualizarContador();
     goBack();
-  }
+}
 
   function abrirCarrito() {
     document.getElementById("Principal").classList.remove("active");
@@ -274,6 +273,17 @@ function actualizarContador() {
   function renderExtras(producto) {
       const extrasDiv = document.getElementById("extras");
       extrasDiv.innerHTML = "";
+
+      if (producto.name.includes("Azulito")) {
+        extrasDiv.innerHTML += `
+            <div class="extra-item">
+                <label style="font-weight: 800; color: var(--azul-oscuro);">
+                    <input type="checkbox" value="Con Alcohol" data-precio="10"> 
+                    Añadir Alcohol (+$10)
+                </label>
+            </div>
+        `;
+      }
 
       if (producto.name.includes("Boneless")) {
           extrasDiv.innerHTML += `
