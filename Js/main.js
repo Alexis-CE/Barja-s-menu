@@ -352,3 +352,15 @@ function restarItem(index) {
   document.getElementById("contador").textContent =
     carrito.reduce((acc, item) => acc + item.cantidad, 0);
 }
+
+function sumarItem(index) {
+  const item = carrito[index];
+
+  item.cantidad += 1;
+  
+  item.priceNum = item.priceUnit * item.cantidad;
+
+  contenidoCarrito();
+
+  actualizarContador();
+}
