@@ -1,5 +1,6 @@
   const carrito = [];
   let pantallaActual = "Principal";
+  let cantidadSeleccionada = 1;
 
   const leche = [
     { name: "Frappé de Galleta", price: "$65", img: "./Assets/galleta.png", desc: "Lleva crema batida, chocolate y/o lechera depende el sabor de su elección y un palito de chocolate." },
@@ -69,6 +70,9 @@
       pantallaActual = "Principal"
 
       renderExtras(item);
+
+      cantidadSeleccionada = 1;
+      document.getElementById("cantidad").textContent = 1;
   }
 
   function goBack() {
@@ -98,17 +102,17 @@
   );
 
     if (existente) {
-      existente.cantidad += 1;
-      existente.priceNum += precioNum;
+      existente.cantidad += cantidadSeleccionada;
+      existente.priceNum += precioNum * cantidadSeleccionada;
       existente.price = `$${existente.priceNum}`;
     } else {
       carrito.push({
         name: itemSeleccionado.name,
         price: `$${precioNum}`,
-        priceNum: precioNum,
+        priceNum: precioNum * cantidadSeleccionada,
         notas: notas,
         extras: extras,
-        cantidad: 1
+        cantidad: cantidadSeleccionada
       });
     }
 
@@ -270,3 +274,11 @@ document.querySelectorAll('input[name="pago"]').forEach(radio => {
     }
   });
 });
+
+function cambiarCantidad(valor) {
+  cantidadSeleccionada += valor;
+
+  if (cantidadSeleccionada < 1) cantidadSeleccionada = 1;
+
+  document.getElementById("cantidad").textContent = cantidadSeleccionada;
+}

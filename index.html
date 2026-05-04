@@ -55,6 +55,11 @@
         <label class="detalle-textarea-label">Instrucciones Especiales:</label>
         <div class="detalle-hint">Escribe aquí tus instrucciones...</div>
         <textarea class="detalle-textarea" id="d-notes" placeholder="Ejemplo: Sin Miguelito"></textarea>
+        <div class="cantidad-box">
+        <button onclick="cambiarCantidad(-1)">−</button>
+        <span id="cantidad">1</span>
+        <button onclick="cambiarCantidad(1)">+</button>
+        </div>
         <button  class="add-btn" onclick="guardarCarrito()">Agregar al pedido</button>
         </div>
 
