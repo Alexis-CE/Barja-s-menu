@@ -2,33 +2,33 @@ const carrito = [];
 let pantallaActual = "Principal";
 
 const leche = [
-  { name: "Frappé de Galleta", price: "$65", img: "../Assets/galleta.png", desc: "Lleva crema batida, chocolate y/o lechera depende el sabor de su elección y un palito de chocolate." },
-  { name: "Frappé de Chocolate", price: "$65", img: "../Assets/chocolate.png", desc: "Lleva crema batida, chocolate y/o lechera depende el sabor de su elección y un palito de chocolate." },
-  { name: "Frappé de Café", price: "$65", img: "../Assets/cafe.png", desc: "Lleva crema batida, chocolate y/o lechera depende el sabor de su elección y un palito de chocolate." },
-  { name: "Frappé de Vainilla", price: "$65", img: "../Assets/vainilla.png", desc: "Lleva crema batida, chocolate y/o lechera depende el sabor de su elección y un palito de chocolate." },
-  { name: "Frappé de Fresa", price: "$65", img: "../Assets/fresa.png", desc: "Lleva crema batida, chocolate y/o lechera depende el sabor de su elección y un palito de chocolate." },
+  { name: "Frappé de Galleta", price: "$65", img: "./Assets/galleta.png", desc: "Lleva crema batida, chocolate y/o lechera depende el sabor de su elección y un palito de chocolate." },
+  { name: "Frappé de Chocolate", price: "$65", img: "./Assets/chocolate.png", desc: "Lleva crema batida, chocolate y/o lechera depende el sabor de su elección y un palito de chocolate." },
+  { name: "Frappé de Café", price: "$65", img: "./Assets/cafe.png", desc: "Lleva crema batida, chocolate y/o lechera depende el sabor de su elección y un palito de chocolate." },
+  { name: "Frappé de Vainilla", price: "$65", img: "./Assets/vainilla.png", desc: "Lleva crema batida, chocolate y/o lechera depende el sabor de su elección y un palito de chocolate." },
+  { name: "Frappé de Fresa", price: "$65", img: "./Assets/fresa.png", desc: "Lleva crema batida, chocolate y/o lechera depende el sabor de su elección y un palito de chocolate." },
 ];
 
 const agua = [
-  { name: "Frappé de Mango", price: "$55", img: "../Assets/mango.png", desc: "El vaso se decora con chamoy y se le pone gomitas" },
-  { name: "Frappé de Tamarindo", price: "$55",  img: "../Assets/tamarindo.png",desc: "El vaso se decora con chamoy y se le pone gomitas" },
-  { name: "Frappé de Fresa", price: "$55", img: "../Assets/fresa2.png",desc: "El vaso se decora con chamoy y se le pone gomitas" },
+  { name: "Frappé de Mango", price: "$55", img: "./Assets/mango.png", desc: "El vaso se decora con chamoy y se le pone gomitas" },
+  { name: "Frappé de Tamarindo", price: "$55",  img: "./Assets/tamarindo.png",desc: "El vaso se decora con chamoy y se le pone gomitas" },
+  { name: "Frappé de Fresa", price: "$55", img: "./Assets/fresa2.png",desc: "El vaso se decora con chamoy y se le pone gomitas" },
 ];
 
 const bebidas = [
-    {name: "Piña colada 1L", price: "$140", img: "../Assets/piñacolada.png", desc: "Se prepara con jugo de piña, calua y si es que lo prefiere con alcohol (por cada caballito mas de alcohol se cobra $10 extra)"},
-    {name: "Piña colada ½L", price: "$80", img: "../Assets/piñacolada.png", desc: "Se prepara con jugo de piña, calua y si es que lo prefiere con alcohol (por cada caballito mas de alcohol se cobra $10 extra)"},
-    {name: "Azulito 1L", price: "$120", img: "../Assets/azulito.png", desc: "Se prepara con sprite, agua mineral y colorante (gatorade) y si es que lo prefiere con alcohol (por cada caballito de alcohol se cobra $10 extra)"},
-    {name: "Azulito ½L", price: "$70", img: "../Assets/azulito.png", desc: "Se prepara con sprite, agua mineral y colorante (gatorade) y si es que lo prefiere con alcohol (por cada caballito de alcohol se cobra $10 extra)"},
-    {name: "Sangría Preparada 1L", price: "$65", img: "../Assets/sangria.png", desc: "El vaso se escarcha con tamarindo. Al interior del vaso se le pone limón con un poco de sal para darle sabor y refresco sangría"},
-    {name: "Sangría Preparada ½L", price: "$35", img: "../Assets/sangria.png", desc: "El vaso se escarcha con tamarindo. Al interior del vaso se le pone limón con un poco de sal para darle sabor y refresco sangría"},
+    {name: "Piña colada 1L", price: "$140", img: "./Assets/piñacolada.png", desc: "Se prepara con jugo de piña, calua y si es que lo prefiere con alcohol (por cada caballito mas de alcohol se cobra $10 extra)"},
+    {name: "Piña colada ½L", price: "$80", img: "./Assets/piñacolada.png", desc: "Se prepara con jugo de piña, calua y si es que lo prefiere con alcohol (por cada caballito mas de alcohol se cobra $10 extra)"},
+    {name: "Azulito 1L", price: "$120", img: "./Assets/azulito.png", desc: "Se prepara con sprite, agua mineral y colorante (gatorade) y si es que lo prefiere con alcohol (por cada caballito de alcohol se cobra $10 extra)"},
+    {name: "Azulito ½L", price: "$70", img: "./Assets/azulito.png", desc: "Se prepara con sprite, agua mineral y colorante (gatorade) y si es que lo prefiere con alcohol (por cada caballito de alcohol se cobra $10 extra)"},
+    {name: "Sangría Preparada 1L", price: "$65", img: "./Assets/sangria.png", desc: "El vaso se escarcha con tamarindo. Al interior del vaso se le pone limón con un poco de sal para darle sabor y refresco sangría"},
+    {name: "Sangría Preparada ½L", price: "$35", img: "./Assets/sangria.png", desc: "El vaso se escarcha con tamarindo. Al interior del vaso se le pone limón con un poco de sal para darle sabor y refresco sangría"},
 ];
 
 const snacks = [
-    {name: "Maruchan", price: "$35", img: "../Assets/maruchan.png", desc: "Preparacion libre"},
+    {name: "Maruchan", price: "$35", img: "./Assets/maruchan.png", desc: "Preparacion libre"},
     {name: "Boneless", price: "$60", img: "../Assets/boneless.jpg", desc: "6 piezas de boneless con la salsa de su preferencia (BBQ, Lemon Peper y Natural) con verdura y por $10 mas le puedes agregar papás a la francesa"},
-    {name: "Papas a la francesa", price: "$45", img: "../Assets/papas.jpg", desc: "Se prepara con queso amarillo derretido, catsup y salsa botanera o valentina (según su gusto)"},
-    {name: "Alitas", price: "$70", img: "../Assets/alitas.png", desc: "Son 6 alitas adobadas preparadas con la salsa de su preferencia (BBQ o naturales) con verdura y por $10 más le pude agregar papas a la francesa"},
+    {name: "Papas a la francesa", price: "$45", img: "./Assets/papas.jpg", desc: "Se prepara con queso amarillo derretido, catsup y salsa botanera o valentina (según su gusto)"},
+    {name: "Alitas", price: "$70", img: "./Assets/alitas.png", desc: "Son 6 alitas adobadas preparadas con la salsa de su preferencia (BBQ o naturales) con verdura y por $10 más le pude agregar papas a la francesa"},
 ];
 
 let itemSeleccionado = null;
