@@ -26,7 +26,7 @@ const bebidas = [
 
 const snacks = [
     {name: "Maruchan", price: "$35", img: "./Assets/maruchan.png", desc: "Preparacion libre"},
-    {name: "Boneless", price: "$60", img: "../Assets/boneless.jpg", desc: "6 piezas de boneless con la salsa de su preferencia (BBQ, Lemon Peper y Natural) con verdura y por $10 mas le puedes agregar papás a la francesa"},
+    {name: "Boneless", price: "$60", img: "./Assets/boneless.jpg", desc: "6 piezas de boneless con la salsa de su preferencia (BBQ, Lemon Peper y Natural) con verdura y por $10 mas le puedes agregar papás a la francesa"},
     {name: "Papas a la francesa", price: "$45", img: "./Assets/papas.jpg", desc: "Se prepara con queso amarillo derretido, catsup y salsa botanera o valentina (según su gusto)"},
     {name: "Alitas", price: "$70", img: "./Assets/alitas.png", desc: "Son 6 alitas adobadas preparadas con la salsa de su preferencia (BBQ o naturales) con verdura y por $10 más le pude agregar papas a la francesa"},
 ];
