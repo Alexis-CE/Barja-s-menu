@@ -273,16 +273,34 @@ function actualizarContador() {
   function renderExtras(producto) {
       const extrasDiv = document.getElementById("extras");
       extrasDiv.innerHTML = "";
+      if (!extrasDiv) return;
+
+      if (producto.name.includes("Piña colada")) {
+              extrasDiv.innerHTML += `
+                  <div class="extra-item">
+                      <label>
+                          <input type="checkbox" value="Con Alcohol (Base)"> 
+                          Con Alcohol 1 Shot (Gratis)
+                      </label>
+                  </div>
+                  <div class="extra-item">
+                      <label>
+                          <input type="checkbox" value="Shot Extra" data-precio="10"> 
+                          Segundo Shot Extra (+$10)
+                      </label>
+                  </div>
+              `;
+      }
 
       if (producto.name.includes("Azulito")) {
-        extrasDiv.innerHTML += `
-            <div class="extra-item">
-                <label style="font-weight: 800; color: var(--azul-oscuro);">
-                    <input type="checkbox" value="Con Alcohol" data-precio="10"> 
-                    Añadir Alcohol (+$10)
-                </label>
-            </div>
-        `;
+              extrasDiv.innerHTML += `
+                  <div class="extra-item">
+                      <label>
+                          <input type="checkbox" value="Con Alcohol" data-precio="10"> 
+                          Añadir Alcohol (+$10)
+                      </label>
+                  </div>
+              `;
       }
 
       if (producto.name.includes("Boneless")) {
