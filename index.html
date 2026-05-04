@@ -72,6 +72,9 @@
         <div id="datosP"><input type="text" id="nombre" placeholder="Ingrese su nombre"></div>
         <input type="radio" name="pago" id="efectivo" value="Efectivo" > <label for="efectivo">Efectivo</label>
         <input type="radio" name="pago" id="transferenciaInput" value="transferencia"> <label for="transferenciaInput">Transferencia</label>
+        <div id="cambioBox" style="display: none;">
+        <input type="number" id="pagaCon" placeholder="¿Con cuánto pagas? (ej: 200)">
+        </div>
         <div id="transferencia"></div>
         <div id="confirmacion"></div>
         <button id="confirmarP" onclick="enviarW()">Confirmar Pedido</button>

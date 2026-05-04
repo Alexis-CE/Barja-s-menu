@@ -157,9 +157,10 @@ section.active {
 }
 
 .cardImg {
-
+  width: 60px;
+  height: 60px;
   object-fit: contain;
-
+  flex-shrink: 0;
 }
 
 .cardName {
@@ -187,9 +188,14 @@ section.active {
 }
 
 .detalleImg {
+  width: 100%;
+  max-width: 170px; 
+  height: auto;
+  display: block;
+  margin: 10px auto;
+  object-fit: contain;
 
-    object-fit: contain;
-
+  image-rendering: auto;
 }
 
 .detalleName {
@@ -431,6 +437,29 @@ label[for="efectivo"], label[for="transferenciaInput"] {
   border-radius: 50%;
   min-width: 20px;
   text-align: center;
+}
+
+/* Cambio */
+#cambioBox {
+  margin-top: 12px;
+}
+
+#pagaCon {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  color: var(--texto);
+  background: var(--blanco);
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+#pagaCon:focus {
+  outline: none;
+  border-color: var(--turquesa);
+  box-shadow: 0 0 0 2px rgba(6,182,212,0.15);
 }
 
 /* ===== MOBILE ===== */
