@@ -157,10 +157,9 @@ section.active {
 }
 
 .cardImg {
-  width: 60px;
-  height: 60px;
+
   object-fit: contain;
-  flex-shrink: 0;
+
 }
 
 .cardName {
@@ -188,13 +187,9 @@ section.active {
 }
 
 .detalleImg {
-    width: 10%;
-    max-width: 30%;
-    border-radius: 15px;
-    margin: 10px auto;
-    display: block;
-    object-fit: cover;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+
+    object-fit: contain;
+
 }
 
 .detalleName {
@@ -461,4 +456,13 @@ label[for="efectivo"], label[for="transferenciaInput"] {
   .detallePrice { font-size: 18px; }
   .add-btn { font-size: 14px; padding: 12px; }
   #irCarrito, #confirmarP { font-size: 14px; padding: 12px; }
+
+    .cardsL, .cardsA, .cardsB, .cardsS {
+    grid-template-columns: 1fr;
+  }
+
+  .cardImg {
+    width: 70px;
+    height: 70px;
+  }
 }
