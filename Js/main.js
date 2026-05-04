@@ -1,4 +1,5 @@
 const carrito = [];
+let pantallaActual = "Principal";
 
 const leche = [
   { name: "Frappé de Galleta", price: "$65", desc: "Lleva crema batida, chocolate y/o lechera depende el sabor de su elección y un palito de chocolate." },
@@ -59,9 +60,163 @@ function abrirDetalle(item) {
     document.getElementById("DetalleP").classList.add("active");
 
     itemSeleccionado = item;
+    pantallaActual = "Principal"
+
+    renderExtras(item);
 }
 
 function goBack() {
-  document.getElementById("DetalleP").classList.remove("active");
+  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+  document.getElementById(pantallaActual).classList.add("active");
+}
+
+function guardarCarrito() {
+  const notas = document.getElementById("d-notes").value;
+
+  let extras = [];
+  document.querySelectorAll("#extras input:checked").forEach(el => {
+    extras.push(el.value);
+  });
+
+  let precioNum = parseInt(itemSeleccionado.price.replace("$", ""));
+
+  if (extras.includes("Papas extra")) {
+    precioNum += 10;
+  }
+
+  carrito.push({
+    name: itemSeleccionado.name,
+    price: `$${precioNum}`,
+    priceNum: precioNum,
+    notas: notas,
+    extras: extras
+  });
+
+  document.getElementById("contador").textContent = carrito.length;
+
+  goBack();
+}
+
+function abrirCarrito() {
+  document.getElementById("Principal").classList.remove("active");
+  document.getElementById("Carrito").classList.add("active");
+  contenidoCarrito();
+
+  pantallaActual = "Principal";
+}
+
+function contenidoCarrito() {
+  const contenedor = document.getElementById("contenidoC");
+  contenedor.innerHTML = "";
+
+  let total = 0;
+
+  carrito.forEach(item => {
+    total += item.priceNum || parseInt(item.price.replace("$", ""));
+
+    const div = document.createElement("button");
+    div.innerHTML = `
+      <p><b>${item.name}</b></p> 
+      <p>${item.price}</p>
+      <p>${item.notas || ""}</p>
+      ${item.extras.length ? `<p>Extras: ${item.extras.join(", ")}</p>` : ""}
+      <hr>
+    `;
+    contenedor.appendChild(div);
+  });
+
+  const totalDiv = document.createElement("div");
+  totalDiv.innerHTML = `<h3>Total: $${total}</h3>`;
+  contenedor.appendChild(totalDiv);
+}
+
+function abrirCompra() {
+  document.getElementById("Carrito").classList.remove("active");
+  document.getElementById("Compra").classList.add("active");
+
+   pantallaActual = "Carrito"
+}
+
+function enviarW() {
+  const nombre = document.getElementById("nombre").value;
+  const pago = document.querySelector('input[name="pago"]:checked');
+
+  if (!nombre || !pago) {
+    alert("Por favor completa tu nombre y método de pago");
+    return;
+  }
+
+  let total = 0;
+
+  let mensaje = `Hola! Mi nombre es ${nombre}\n`;
+  mensaje += `=========================\n`;
+  mensaje += `        *MI PEDIDO*\n`;
+  mensaje += `=========================\n\n`;
+
+  carrito.forEach(item => {
+    total += item.priceNum || parseInt(item.price.replace("$", ""));
+
+    mensaje += `- 1 x ${item.name} (${item.price})\n`;
+
+    if (item.extras && item.extras.length > 0) {
+      item.extras.forEach(extra => {
+        mensaje += `   • ${extra}\n`;
+      });
+    }
+
+    if (item.notas) {
+      mensaje += `   • Nota: ${item.notas}\n`;
+    }
+
+    mensaje += `\n`;
+  });
+
+  mensaje += `=========================\n`;
+  mensaje += `TOTAL: $${total}\n`;
+  mensaje += `=========================\n`;
+  mensaje += `Pago: ${pago.value}\n`;
+  mensaje += `=========================\n`;
+
+  const url = `https://wa.me/525549641567?text=${encodeURIComponent(mensaje)}`;
+  window.open(url);
+}
+
+let productoActual = null;
+
+function renderExtras(producto) {
+    const extrasDiv = document.getElementById("extras");
+    extrasDiv.innerHTML = "";
+
+    if (producto.name.includes("Boneless")) {
+        extrasDiv.innerHTML += `
+            <label>Sabor:</label><br>
+            <input type="radio" name="sabor" value="BBQ"> BBQ
+            <input type="radio" name="sabor" value="Lemon Pepper"> Lemon Pepper
+            <input type="radio" name="sabor" value="Natural"> Natural
+            <br><br>
+            <input type="checkbox" value="Papas extra"> + Papas a la francesa (+$10)
+        `;
+    }
+
+    if (producto.name.includes("Papas")) {
+        extrasDiv.innerHTML += `
+            <label>Salsa:</label><br>
+            <input type="radio" name="salsa" value="Botanera"> Botanera
+            <input type="radio" name="salsa" value="Valentina"> Valentina
+        `;
+    }
+
+    if (producto.name.includes("Alitas")) {
+        extrasDiv.innerHTML += `
+            <label>Sabor:</label><br>
+            <input type="radio" name="sabor" value="BBQ"> BBQ
+            <input type="radio" name="sabor" value="Natural"> Natural
+        `;
+    }
+}
+
+function regresarAlPrincipal() {
+  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
   document.getElementById("Principal").classList.add("active");
+  pantallaActual = "Principal";
 }

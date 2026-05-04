@@ -1,7 +1,437 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&display=swap');
+
+/* ===== VARIABLES ===== */
+:root {
+  --azul: #0ea5e9;
+  --azul-oscuro: #0369a1;
+  --turquesa: #06b6d4;
+  --amarillo: #fbbf24;
+  --naranja: #f97316;
+  --verde: #22c55e;
+  --fondo: #e0f7fa;
+  --blanco: #ffffff;
+  --texto: #1e293b;
+  --card-bg: #ffffff;
+  --sombra: rgba(0, 0, 0, 0.12);
+}
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+body {
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(160deg, #e0f7fa 0%, #b3e5fc 50%, #e8f5e9 100%);
+  min-height: 100vh;
+  color: var(--texto);
+}
+
+/* ===== HEADER ===== */
+header {
+  background: linear-gradient(135deg, #0284c7, #06b6d4, #0ea5e9);
+  text-align: center;
+  padding: 28px 20px 22px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4);
+}
+
+header::before {
+  content: "🌴";
+  position: absolute;
+  left: 0px;    
+  top: 0px;
+  font-size: 100px;  
+  opacity: 0.8;
+}
+
+header::after {
+  content: "🌴";
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  font-size: 100px;
+  opacity: 0.8;
+  transform: scaleX(-1);
+}
+
+header h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 40px;
+  color: var(--amarillo);
+  text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+  line-height: 1.3;
+}
+
+header h3 {
+  font-size: 15px;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 2px;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+/* ===== SECTIONS ===== */
 section {
-    display: none;
+  display: none;
+  padding: 20px 16px 100px;
+  animation: fadeUp 0.3s ease;
 }
 
 section.active {
-    display: block;
+  display: block;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== TÍTULOS DE CATEGORÍA ===== */
+#leche, #agua, #Bebidas, #Snacks {
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--blanco);
+  background: linear-gradient(90deg, var(--azul-oscuro), var(--turquesa));
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 3px 10px rgba(6,182,212,0.3);
+}
+
+/* ===== GRID DE CARDS ===== */
+.cardsL, .cardsA, .cardsB, .cardsS {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+/* ===== CARD ===== */
+.item-card {
+  background: var(--card-bg);
+  border: none;
+  border-radius: 18px;
+  padding: 16px 12px;
+  color: var(--texto);
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.18s, box-shadow 0.18s;
+  box-shadow: 0 4px 14px var(--sombra);
+  position: relative;
+  overflow: hidden;
+}
+
+.item-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--azul), var(--turquesa), var(--amarillo));
+}
+
+.item-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(6,182,212,0.25);
+}
+
+.item-card:active {
+  transform: scale(0.97);
+}
+
+.cardName {
+  display: block;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.3;
+  margin-top: 6px;
+  color: var(--texto);
+}
+
+.cardPrice {
+  display: block;
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--naranja);
+}
+
+/* ===== SECCIÓN DETALLE ===== */
+.Detalle {
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 2px dashed rgba(6,182,212,0.3);
+  margin-bottom: 16px;
+}
+
+.detalleName {
+  font-family: 'Pacifico', cursive;
+  font-size: 22px;
+  color: var(--azul-oscuro);
+  margin-top: 10px;
+}
+
+.detallePrice {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--naranja);
+  margin-top: 4px;
+}
+
+.detalle-body {
+  background: var(--blanco);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 4px 16px var(--sombra);
+}
+
+.detalle-info {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #475569;
+  margin-bottom: 14px;
+}
+
+.detalle-textarea-label {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--azul-oscuro);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.detalle-hint {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.detalle-textarea {
+  width: 100%;
+  height: 80px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  padding: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  color: var(--texto);
+  background: #f8fafc;
+  resize: none;
+  transition: border 0.2s;
+}
+
+.detalle-textarea:focus {
+  outline: none;
+  border-color: var(--turquesa);
+}
+
+/* ===== EXTRAS ===== */
+#extras {
+  background: #f0fdff;
+  border: 2px dashed var(--turquesa);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+#extras label {
+  font-weight: 700;
+  color: var(--azul-oscuro);
+}
+
+#extras input {
+  margin-right: 5px;
+  accent-color: var(--azul);
+}
+
+/* ===== BOTÓN AGREGAR ===== */
+.add-btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--verde), #16a34a);
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 4px 12px rgba(34,197,94,0.35);
+}
+
+.add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(34,197,94,0.45);
+}
+
+/* ===== BOTÓN BACK ===== */
+.detalle-back {
+  background: transparent;
+  border: none;
+  color: var(--azul);
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.detalle-back:hover {
+  color: var(--azul-oscuro);
+}
+
+/* ===== CARRITO ===== */
+#contenidoC button {
+  width: 100%;
+  background: var(--blanco);
+  border: none;
+  padding: 14px 16px;
+  border-radius: 16px;
+  margin-bottom: 10px;
+  color: var(--texto);
+  text-align: left;
+  box-shadow: 0 3px 10px var(--sombra);
+  font-family: 'Nunito', sans-serif;
+  border-left: 4px solid var(--turquesa);
+}
+
+#contenidoC button p {
+  margin-bottom: 2px;
+  font-size: 14px;
+}
+
+#contenidoC button p:first-child {
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--azul-oscuro);
+}
+
+/* ===== BOTONES PAGO ===== */
+#irCarrito, #confirmarP {
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--amarillo), var(--naranja));
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 4px 14px rgba(251,191,36,0.4);
+}
+
+#irCarrito:hover, #confirmarP:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(251,191,36,0.5);
+}
+
+/* ===== COMPRA ===== */
+#datosP {
+  margin-bottom: 16px;
+}
+
+#nombre {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  color: var(--texto);
+  background: var(--blanco);
+  transition: border 0.2s;
+}
+
+#nombre:focus {
+  outline: none;
+  border-color: var(--turquesa);
+}
+
+.pago-opciones {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+input[type="radio"] {
+  accent-color: var(--azul);
+  margin-right: 5px;
+}
+
+label[for="efectivo"], label[for="transferenciaInput"] {
+  font-weight: 700;
+  margin-right: 16px;
+  color: var(--azul-oscuro);
+}
+
+/* ===== FLOTANTE ===== */
+.flotante {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  background: linear-gradient(135deg, var(--azul), var(--turquesa));
+  color: white;
+  border-radius: 50%;
+  width: 62px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(6,182,212,0.5);
+  transition: 0.2s;
+}
+
+.flotante:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 26px rgba(6,182,212,0.6);
+}
+
+/* ===== CONTADOR ===== */
+.contador {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--naranja);
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 50%;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+  header h1 { font-size: 22px; }
+  header h3 { font-size: 11px; }
+
+  .cardsL, .cardsA, .cardsB, .cardsS {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .item-card { padding: 12px 8px; }
+  .cardName { font-size: 12px; }
+  .cardPrice { font-size: 16px; }
+
+  .flotante { width: 54px; height: 54px; font-size: 22px; }
 }

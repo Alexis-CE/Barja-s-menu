@@ -30,6 +30,11 @@
         <div id="Snacks">Snacks</div>
         <div class="cardsS" id="gridS"></div>
 
+        <div class="flotante" onclick="abrirCarrito()"> 
+        🛒
+        <span id="contador" class="contador"></span>
+        </div>
+
     </section>
 
     <section id="DetalleP">
@@ -46,20 +51,31 @@
         <p class="detalle-info" id="d-desc"></p>
         <p class="detalle-subtext"></p>
         <p class="detalle-subtext"></p>
+        <div id="extras"></div>
         <label class="detalle-textarea-label">Instrucciones Especiales:</label>
         <div class="detalle-hint">Ejemplo: Sin Miguelito</div>
         <textarea class="detalle-textarea" id="d-notes" placeholder="Escribe aquí tus instrucciones..."></textarea>
-        <button class="add-btn">Agregar al pedido</button>
+        <button  class="add-btn" onclick="guardarCarrito()">Agregar al pedido</button>
         </div>
 
     </section>
 
     <section id="Carrito">
+        <button class="detalle-back" onclick="regresarAlPrincipal()">← Regresar</button>
+        <div id="contenidoC" class="contenidoC">
 
+        </div>
+        <button id="irCarrito" onclick="abrirCompra()">Proceder al pago</button>   
     </section>
 
     <section id="Compra">
-
+        <div id="datosP"><input type="text" id="nombre" placeholder="Ingrese su nombre"></div>
+        <input type="radio" name="pago" id="efectivo" value="Efectivo" > <label for="efectivo">Efectivo</label>
+        <input type="radio" name="pago" id="transferenciaInput" value="transferencia"> <label for="transferenciaInput">Transferencia</label>
+        <div id="transferencia"></div>
+        <div id="confirmacion"></div>
+        <button id="confirmarP" onclick="enviarW()">Confirmar Pedido</button>
+        <button class="detalle-back" onclick="goBack()">← Regresar</button>
     </section>
 
     <script src="./Js/main.js"></script>
