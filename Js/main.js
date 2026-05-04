@@ -57,7 +57,7 @@ crearCartas(bebidas, "gridB");
 crearCartas(snacks, "gridS");
 
 function abrirDetalle(item) {
-      document.getElementById("Detalle-img").textContent = item.img;
+    document.getElementById("Detalle-img").src = item.img;
     document.getElementById("Detalle-name").textContent = item.name;
     document.getElementById("Detalle-price").textContent = item.price;
     document.getElementById("d-desc").textContent = item.desc;
