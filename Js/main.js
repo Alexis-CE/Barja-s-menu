@@ -1,4 +1,4 @@
-  const carrito = [];
+const carrito = [];
   let pantallaActual = "Principal";
   let cantidadSeleccionada = 1;
 
@@ -247,7 +247,7 @@ function actualizarContador() {
         mensaje += `Cambio: $${pagaCon - total}\n`;
     }
 
-    if (pagoValor === "transferencia") {
+    if (pagoValor === "Transferencia") {
         mensaje += `\n⚠️ *Recuerda mandar tu comprobante de pago.*\n`;
     }
 
@@ -279,19 +279,28 @@ function actualizarContador() {
                 <div class="extra-item">
                     <label><input type="radio" name="alcohol_base" value="Con Alcohol (1er Shot Gratis)"> Con Alcohol (1er Shot Gratis)</label>
                 </div>
-                <div class="extra-item" style="margin-top:8px; border-top:1px solid #eee; padding-top:8px;">
-                    <label><input type="checkbox" value="2do Shot Extra" data-precio="10"> ¿Deseas un 2do Shot? (+$10)</label>
+                <div class="extra-item">
+                    <label><input type="radio" name="alcohol_base" value="2do Shot Extra" data-precio="10"> ¿Deseas un 2do Shot? (+$10)</label>
                 </div>
             </div>
+        `;
+    }
+
+    if (nombre.includes("maruchan")) {
+        extrasDiv.innerHTML += `
+            <label>Sabor:</label><br>
+            <input type="radio" name="sabor" value="Camarón" checked> Camarón
+            <input type="radio" name="sabor" value="Camarón y Chile Piquín"> Camarón y Chile Piquín
+            <input type="radio" name="sabor" value="Camarón, Limón y Habanero"> Camarón, Limón y Habanero
         `;
     }
 
     if (nombre.includes("boneless")) {
         extrasDiv.innerHTML += `
             <label>Sabor:</label><br>
-            <input type="radio" name="sabor" value="BBQ" checked> BBQ
+            <input type="radio" name="sabor" value="Natural" checked> Natural
+            <input type="radio" name="sabor" value="BBQ"> BBQ
             <input type="radio" name="sabor" value="Lemon Pepper"> Lemon Pepper
-            <input type="radio" name="sabor" value="Natural"> Natural
             <br><br>
             <input type="checkbox" value="Papas extra" data-precio="10"> + Papas a la francesa (+$10)
         `;
@@ -300,16 +309,18 @@ function actualizarContador() {
     if (nombre.includes("papas")) {
         extrasDiv.innerHTML += `
             <label>Salsa:</label><br>
-            <input type="radio" name="salsa" value="Botanera" checked> Botanera
-            <input type="radio" name="salsa" value="Valentina"> Valentina
+            <input type="radio" name="salsa" value="Sin Salsa" checked> Sin Salsa
+            <input type="radio" name="salsa" value="Con Salsa"> Con Salsa
+            <br><br>
+            <input type="checkbox" value="Sin Queso"> Sin Queso
         `;
     }
 
     if (nombre.includes("alitas")) {
         extrasDiv.innerHTML += `
             <label>Sabor:</label><br>
-            <input type="radio" name="sabor" value="BBQ" checked> BBQ
-            <input type="radio" name="sabor" value="Natural"> Natural
+            <input type="radio" name="sabor" value="Natural" checked> Natural
+            <input type="radio" name="sabor" value="BBQ"> BBQ
         `;
     }
 }
